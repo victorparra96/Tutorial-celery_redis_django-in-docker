@@ -43,3 +43,13 @@ services:
             - db
             - redis
             - app
+
+    # Celery beat
+    celery-beat:
+        build: 
+            context: .
+        command: celery -A core beat -l info
+        volumes:
+          - .:/django
+        depends_on:
+          - redis
